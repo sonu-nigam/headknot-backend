@@ -1,0 +1,38 @@
+version: "3.7"
+
+services:
+    postgres:
+        container_name: workflow_postgres
+        image: "postgres:latest"
+        environment:
+            POSTGRES_DB: mydatabase
+            POSTGRES_PASSWORD: secret
+            POSTGRES_USER: myuser
+        volumes:
+            - postgres_data:/var/lib/postgresql/data  # Use named volume for persistence
+        ports:
+            - "5432:5432"  # Explicitly map to host port (optional)
+        restart: unless-stopped
+
+    pgadmin:
+        container_name: workflow_pgadmin
+        image: dpage/pgadmin4:latest
+        environment:
+            PGADMIN_DEFAULT_EMAIL: admin@localhost.com
+            PGADMIN_DEFAULT_PASSWORD: admin
+            PGADMIN_LISTEN_PORT: 8888
+            PGADMIN_CONFIG_SERVER_MODE: "False"
+            PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
+        volumes:
+            - pgadmin_data:/var/lib/pgadmin
+            - ./docker_pgadmin_servers.json:/pgadmin4/servers.json
+        ports:
+            - "8888:8888"
+        entrypoint:
+            - "/bin/sh"
+            - "-c"
+            - "/bin/echo 'postgres:5432:*:myuser:secret' > /tmp/pgpassfile && chmod 600 /tmp/pgpassfile && /entrypoint.sh"
+
+volumes:
+    postgres_data:  # Named volume for PostgreSQL (managed by Docker)
+    pgadmin_data:   # Named volume for PGAdmin

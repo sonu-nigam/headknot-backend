@@ -9,7 +9,7 @@ services:
         environment:
             SPRING_PROFILES_ACTIVE: dev
         networks:
-            - spring-network
+            - dokploy-network
 
 networks:
-    spring-network:
+    dokploy-network:
