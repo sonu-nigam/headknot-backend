@@ -1,0 +1,25 @@
+<div class="mb-5 flex justify-between">
+    <span class="text-sm font-semibold opacity-70">Properties</span>
+    <button class="btn btn-soft btn-neutral btn-sm">
+        {% inlineSvg "cog" %} Configure
+    </button>
+</div>
+<ul class="text-sm grid grid-cols-[0.75fr_1.25fr] items-center gap-2">
+    <dt>Status</dt>
+    <dd>{% include "pages/tasks/task/details/properties/status" %}</dd>
+    <dt>Priority</dt>
+    <dd>{% include "pages/tasks/task/details/properties/priority" %}</dd>
+    <dt>Estimates</dt>
+    <dd>{% include "pages/tasks/task/details/properties/estimates" %}</dd>
+    <dt>Tags</dt>
+    <dd>{% include "pages/tasks/task/details/properties/labels" %}</dd>
+    <dt>Assigned to</dt>
+    <dd>
+        {%
+            include "pages/tasks/task/details/properties/assignedTo" with {
+                "popovertarget": "TASK_LIST_" ~ taskSlug | replace({"-": "_"}) ~ "_ASSIGNEE_OPTIONS",
+                "anchorname": "--ASSIGNEE_" ~ (taskSlug | replace({"-": "_"})) ~ "_ANCHOR"
+            }
+        %}
+    </dd>
+</ul>

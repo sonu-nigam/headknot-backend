@@ -1,0 +1,54 @@
+{% set currentStatus = task.status %}
+<button
+    id="{{ taskSlug ~ '-task-status' }}"
+    class="btn btn-xs btn-soft whitespace-nowrap"
+    popovertarget="{{ taskSlug ~ '-task-status-options' }}"
+    style="anchor-name:--task-status-{{ task.taskId }}-anchor; --btn-color:{{ task.status.statusColor }} "
+    hx-trigger="refreshTaskStatus from:body"
+    hx-swap="outerHTML"
+    hx-select="#{{ taskSlug ~ '-task-status' }}"
+    hx-target="#{{ taskSlug ~ '-task-status' }}"
+    hx-get="{{ '/tasks/' ~ taskSlug ~ '/status' }}"
+    hx-select-oob="{{ taskSlug ~ '-task-status-options' }}:outerHTML"
+>
+    {% inlineSvg "outline/circle" %}
+    {{ task.status.statusName }}
+</button>
+<ul
+    class="dropdown menu w-52 rounded-box bg-base-100 shadow-sm border top-1"
+    popover
+    id="{{ taskSlug ~ '-task-status-options' }}"
+    style="{{ 'position-anchor:--task-status-' ~ task.taskId ~ '-anchor' }}"
+    hx-patch="{{ '/tasks/' ~ taskSlug ~ '/status' }}"
+    hx-swap="none"
+    hx-include="#{{ taskSlug ~ '-task-status-options' ~ ' [name=\'status\']' }}"
+    hx-trigger="change"
+>
+    {% for status in statusList %}
+        <li>
+            {% if status.statusId == task.status.statusId %}
+                <label class="rounded-[4px] px-2 py-1 menu-active">
+                    <input
+                        type="radio"
+                        name="status"
+                        class="hidden"
+                        value="{{ status.statusId }}"
+                    />
+                    {% inlineSvg "circle" %}
+                    {{ status.statusName }}
+                </label>
+            {% else %}
+                <label class="rounded-[4px] px-2 py-1">
+                    <input
+                        type="radio"
+                        name="status"
+                        class="hidden"
+                        value="{{ status.statusId }}"
+                    />
+                    {% inlineSvg "circle" %}
+                    {{ status.statusName }}
+                </label>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>

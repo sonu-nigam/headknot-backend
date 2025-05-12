@@ -1,0 +1,21 @@
+{% embed "pages/tasks/project/common/projectHeader" %}
+    {% block navaction %}
+        <div class="flex gap-3">
+            <button class="btn btn-sm">
+                {% inlineSvg "outline/adjustments" %}
+                Display
+            </button>
+            <button class="btn btn-sm" onclick="CREATE_TASK_MODAL.showModal()">
+                {% inlineSvg "outline/plus" %} Create Task
+            </button>
+            <dialog id="CREATE_TASK_MODAL" class="modal">
+                <div class="modal-box p-0 rounded-md">
+                    {% include "forms/tasks/task/createTask" %}
+                </div>
+            </dialog>
+        </div>
+    {% endblock %}
+{% endembed %}
+<div class="px-3 pt-5 pb-0">
+    {% include "pages/tasks/project/details/taskList" %}
+</div>

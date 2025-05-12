@@ -1,0 +1,51 @@
+{% set dashedTaskSlug = taskSlug | replace({"-": "_"}) %}
+{% set popovertarget = "taskList_" ~ dashedTaskSlug ~ "_issueType_options" %}
+{% set anchorname = "--" ~ dashedTaskSlug ~ "_issueType_anchor" %}
+{%
+    set issueTypeOptions = [
+            {"label": "Task", "issueTypeId": "TASK"},
+            {"label": "Bug", "issueTypeId": "BUG"},
+            {"label": "Story", "issueTypeId": "STORY"}
+    ]
+%}
+{% set currentPriority = task.priority %}
+<button
+    class="btn btn-xs whitespace-nowrap"
+    popovertarget="{{ popovertarget }}"
+    style="anchor-name:{{ anchorname }}"
+    hx-trigger="refreshTaskIssueType from:body"
+    hx-swap="outerHTML"
+    hx-select="[popovertarget={{ popovertarget }}]"
+    hx-target="[popovertarget={{ popovertarget }}]"
+    hx-get="{{ '/tasks/' ~ taskSlug ~ '/issueType' }}"
+    hx-select-oob="{{ popovertarget }}:outerHTML"
+>
+    {{ task.issueType.label }}
+</button>
+{% embed "components/dropdown" %}
+    {% block options %}
+        <div class="w-full p-0">
+            {% if issueTypeOptions is empty %}
+                <button class="btn">Invite user</button>
+            {% else %}
+                <form
+                    hx-patch="/tasks/{{ taskSlug }}/assignedTo"
+                    hx-swap="none"
+                >
+                    {% embed "components/list" with { "data": issueTypeOptions } %}
+                        {% block listitem %}
+                            {% set currentMenuItemClass = item.issueTypeId == task.issueType.issueTypeId ? 'menu-active': '' %}
+                            <button
+                                class="{{ currentMenuItemClass }}"
+                                value="{{ item.issueTypeId }}"
+                                name="issueType"
+                            >
+                                {{ item.label }}
+                            </button>
+                        {% endblock %}
+                    {% endembed %}
+                </form>
+            {% endif %}
+        </div>
+    {% endblock %}
+{% endembed %}

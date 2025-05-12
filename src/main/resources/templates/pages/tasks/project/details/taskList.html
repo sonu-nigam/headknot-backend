@@ -1,0 +1,78 @@
+<div
+    class="pb-3 overflow-x-auto"
+    hx-get="/projects/AMP"
+    hx-headers='{"x-refresh": true}'
+    hx-trigger="refreshTaskList from:body"
+    hx-swap="outerHTML"
+>
+    <table
+        class="table table-fixed table-sm table-pin-rows table-pin-cols"
+        id="PROJECT_TASK_LIST"
+    >
+        <thead>
+            <tr>
+                <th style="width: 100px">
+                    <input
+                        type="checkbox"
+                        name="selectAll"
+                        class="ml-[36px] checkbox checkbox-xs rounded-sm"
+                    />
+                </th>
+                <td style="width: 150px">Type</td>
+                <td style="width: 100px">Slug</td>
+                <td style="width: 300px">Title</td>
+                <td style="width: 150px">Status</td>
+                <td style="width: 150px">Priority</td>
+                <td style="width: 300px">Labels</td>
+                <td style="width: 200px">Assignee</td>
+                <td style="width: 150px">Due Date</td>
+                <td style="width: 150px">Created</td>
+                <td style="width: 150px">Updated</td>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% include "pages/tasks/project/details/taskListBody" %}
+        </tbody>
+    </table>
+</div>
+<script>
+    htmx.onLoad(function (content) {
+        var sortable = content.querySelector("#PROJECT_TASK_LIST tbody");
+        if (sortable) {
+            var sortableInstance = new Sortable(sortable, {
+                animation: 150,
+                ghostClass: "blue-background-class",
+
+                // Make the `.htmx-indicator` unsortable
+                handle: ".handle",
+                filter: ".htmx-indicator",
+                onMove: function (evt) {
+                    return (
+                        evt.related.className.indexOf("htmx-indicator") === -1
+                    );
+                },
+
+                // Disable sorting on the `end` event
+                onEnd: function (evt) {
+                    console.log(evt);
+                    this.option("disabled", true);
+                    const taskSlug = htmx.find(
+                        evt.item,
+                        "[name='taskOrder']",
+                    ).value;
+                    htmx.ajax("PATCH", `/tasks/${taskSlug}/taskOrder`, {
+                        values: {
+                            taskOrder: evt.newIndex,
+                        },
+                    });
+                },
+            });
+
+            // Re-enable sorting on the `htmx:afterSwap` event
+            sortable.addEventListener("htmx:afterRequest", function () {
+                sortableInstance.option("disabled", false);
+            });
+        }
+    });
+</script>

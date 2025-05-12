@@ -1,0 +1,25 @@
+<div class="py-1 flex gap-2 items-center w-full box-border">
+    <div class="flex gap-2 items-center">
+        <div class="flex gap-1 flex-shrink-0">
+            <button class="w-5 h-5 text-orange-500">
+                {% inlineSvg "circle" %}
+            </button>
+            <span class="text-sm opacity-70 w-16">{{project.slug}}-{{task.taskId}}</span>
+        </div>
+    </div>
+    <a
+        href="/tasks/{{project.slug}}-{{task.taskId}}"
+        class="text-sm text-blue-700 font-semibold truncate flex-1"
+    >
+        {{task.title}}
+    </a>
+    <div class="flex gap-2 items-center">
+        <span class="badge badge-sm flex-shrink-0 rounded-sm h-5">No Projects</span>
+        <span class="text-xs text-gray-500 ml-auto shrink-0">Jun 20</span>
+        <span>
+            <button class="w-5 h-5 text-orange-500">
+                {% inlineSvg "circle" %}
+            </button>
+        </span>
+    </div>
+</div>

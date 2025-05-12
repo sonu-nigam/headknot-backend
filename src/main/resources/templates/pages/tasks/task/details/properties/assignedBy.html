@@ -1,0 +1,82 @@
+{% set popovertarget = "TASK_LIST_" ~ (taskSlug | replace({"-": "_"})) ~ "_ASSIGNEDBY_OPTIONS" %}
+{% set anchorname = "--ASSIGNEDBY_" ~ (taskSlug | replace({"-": "_"})) ~ "_ANCHOR" %}
+
+<button
+    class="btn btn-ghost btn-sm btn-neutral"
+    popovertarget="{{ popovertarget }}"
+    id="{{ buttonid }}"
+    style="anchor-name:{{ anchorname }}"
+    hx-trigger="REFRESH_TASK_ASSIGNEDTO from:body"
+    hx-swap="outerHTML"
+    hx-select="#{{ taskSlug }}-task-priority"
+    hx-target="#{{ taskSlug}}-task-priority"
+    hx-get="/tasks/{{taskSlug}}/priority"
+    hx-select-oob="{{ taskSlug }}-task-priority-options:outerHTML"
+>
+    Show Popup
+</button>
+{% embed "macros/dropdown" %}
+    {% block search %}
+        <form
+            hx-get="/tasks/{{ taskSlug }}/assignedTo"
+            hx-trigger="input changed delay:500ms, keyup[key=='Enter']"
+            hx-target="#{{ taskSlug|replace({'-': '_'}) }}_TASK_ASSIGNEDTO"
+            hx-select="#{{ taskSlug|replace({'-': '_'}) }}_TASK_ASSIGNEDTO"
+            hx-swap="outerHTML"
+        >
+            <label class="input input-sm">
+                {% inlineSvg "outline/search" %}
+                <input
+                    type="search"
+                    class="grow"
+                    placeholder="Search"
+                    name="search"
+                    autocomplete="off"
+                >
+            </label>
+        </form>
+    {% endblock %}
+    {% block options %}
+        <form
+            hx-patch="/tasks/{{ taskSlug }}/assignedTo"
+            hx-swap="none"
+            hx-trigger="change"
+        >
+            {% embed "macros/list" with {
+                "data": userList,
+                "menuId": taskSlug|replace({'-': '_'}) ~ "_TASK_ASSIGNEDTO"
+            } %}
+                {% block listitem %}
+                    <label class="flex items-center">
+                        <input
+                            type="radio"
+                            class="radio hidden"
+                            name="assignedTo"
+                            value="{{ item.userId }}"
+                        />
+                        <span class="avatar">
+                            <div class="w-7 rounded-full">
+                                <img
+                                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                                />
+                            </div>
+                        </span>
+                        <div>
+                            <div class="text-xs">
+                                {{ item.firstName }} {{ item.lastName }}
+                            </div>
+                            <div
+                                class="uppercase font-semibold opacity-50 text-[9px] leading-4"
+                            >
+                                @{{ item.userName }}
+                            </div>
+                        </div>
+                    </label>
+                {% endblock %}
+            {% endembed %}
+        </form>
+        {% if userList is empty %}
+            <div>No Results Found</div>
+        {% endif %}
+    {% endblock %}
+{% endembed %}

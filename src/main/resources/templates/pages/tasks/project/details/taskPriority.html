@@ -1,0 +1,75 @@
+<button
+    id="{{ taskSlug ~ '-task-priority' }}"
+    class="btn btn-sm whitespace-nowrap"
+    popovertarget="{{ taskSlug ~ '-task-priority-options' }}"
+    style="anchor-name:--task-priority-{{ task.taskId }}-anchor"
+    hx-trigger="refreshTaskPriority from:body"
+    hx-swap="outerHTML"
+    hx-select="#{{ taskSlug ~ '-task-priority' }}"
+    hx-target="#{{ taskSlug ~ '-task-priority' }}"
+    hx-get="{{ '/tasks/' ~ taskSlug ~ '/priority' }}"
+    hx-select-oob="{{ taskSlug ~ '-task-priority-options' }}:outerHTML"
+>
+    {% if task.priority is empty %}
+        <span class="text-[{{ task.priority.color }}]">
+            {% inlineSvg "outline/flag" %}
+        </span>
+        No Priority
+    {% else %}
+        <span class="text-[{{ task.priority.color }}]">
+            {% inlineSvg "filled/flag" %}
+        </span>
+        {{ task.priority.title }}
+    {% endif %}
+</button>
+<ul
+    class="dropdown menu w-52 rounded-box bg-base-100 shadow-sm border top-1"
+    popover
+    id="{{ taskSlug ~ '-task-priority-options' }}"
+    style="{{ 'position-anchor:--task-priority-' ~ task.taskId ~ '-anchor' }}"
+    hx-patch="{{ '/tasks/' ~ taskSlug ~ '/priority' }}"
+    hx-swap="none"
+    hx-include="#{{ taskSlug ~ '-task-priority-options' ~ ' [name=\'priority\']' }}"
+    hx-trigger="change"
+>
+    {% for priority in priorityList %}
+        <li>
+            {% if priority.priorityId == task.priority.priorityId %}
+                <label class="rounded-[4px] px-2 py-1 menu-active">
+                    <input
+                        type="radio"
+                        name="priority"
+                        class="hidden"
+                        value="{{ priority.priorityId }}"
+                    />
+                    <span class="text-[{{ priority.color }}]">
+                        {% inlineSvg "filled/flag" %}
+                    </span>
+                    {{ priority.title }}
+                </label>
+            {% else %}
+                <label class="rounded-[4px] px-2 py-1">
+                    <input
+                        type="radio"
+                        name="priority"
+                        class="hidden"
+                        value="{{ priority.priorityId }}"
+                    />
+                    <span class="text-[{{ priority.color }}]">
+                        {% inlineSvg "filled/flag" %}
+                    </span>
+                    {{ priority.title }}
+                </label>
+            {% endif %}
+        </li>
+    {% endfor %}
+    <li>
+        <label class="rounded-[4px] px-2 py-1">
+            <input type="radio" name="priority" class="hidden" value="" />
+            <span class="text-[{{ priority.color }}]">
+                {% inlineSvg "outline/cancel" %}
+            </span>
+            Clear
+        </label>
+    </li>
+</ul>

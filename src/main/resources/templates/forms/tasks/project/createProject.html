@@ -1,0 +1,87 @@
+<form
+    id="CREATE_PROJECT_FORM"
+    method="dialog"
+    hx-post="/projects"
+    hx-target="#PROJECT_TASK_LIST"
+    hx-swap="beforeend"
+    hx-on::after-request="handleCreateProjectForm()"
+>
+    <script>
+        function handleCreateProjectForm() {
+            document.querySelector("#CREATE_PROJECT_MODAL").close();
+            document.querySelector("#CREATE_PROJECT_FORM").reset();
+        }
+    </script>
+    <div
+        class="px-3 py-2 flex justify-between items-center gap-3 border-b border-gray-200"
+    >
+        <div class="breadcrumbs text-sm py-1">
+            <ul>
+                <li>
+                    {% inlineSvg "outline/home" %}
+                    {{ project.slug }}
+                </li>
+                <li>New Project</li>
+            </ul>
+        </div>
+        <div class="flex gap-2">
+            <button
+                type="button"
+                class="btn btn-sm rounded-sm btn-square text-xl"
+                aria-label="close"
+                formmethod="dialog"
+                onclick="CREATE_PROJECT_MODAL.close()"
+            >
+                {% inlineSvg "outline/x" %}
+            </button>
+        </div>
+    </div>
+    <fieldset class="fieldset bg-base-200 p-4">
+        <label class="">
+            <div class="fieldset-label mb-1.5">Project Title *</div>
+            <input
+                type="text"
+                name="projectName"
+                placeholder="Project Title"
+                class="input input-sm w-full validator"
+                required
+            />
+            <div class="validator-hint">Enter valid Project Title</div>
+        </label>
+        <label>
+            <div class="fieldset-label mb-1.5">Project slug *</div>
+            <input
+                type="text"
+                name="slug"
+                placeholder="key"
+                class="input input-sm w-full validator"
+                required
+                pattern="^[A-Z0-9_]{1,5}$"
+                maxlength="5"
+            />
+            <div class="validator-hint">Enter valid Project Slug</div>
+        </label>
+        <label class="">
+            <div class="fieldset-label mb-1.5">Description</div>
+            <textarea
+                name="description"
+                placeholder="Tell us about the project..."
+                class="textarea h-24 w-full"
+                required
+            ></textarea>
+        </label>
+        <div class="flex gap-3 mt-3 justify-end">
+            <button
+                type="button"
+                aria-label="close"
+                formmethod="dialog"
+                class="btn btn-neutral btn-sm"
+                onclick="CREATE_PROJECT_MODAL.close()"
+                hx-disinherit
+            >
+                Cancel
+            </button>
+            <button class="btn btn-primary btn-sm" type="submit">Save</button>
+        </div>
+    </fieldset>
+</form>

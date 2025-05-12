@@ -1,0 +1,14 @@
+<aside class="border-r-2 border-gray-50 border-solid">
+    <nav class="">
+        <ul class="menu w-full min-w-60">
+            {% for item in navMenu %}
+                <li class="">
+                    <a href="/{{ item.url|lower }}">
+                        {% inlineSvg "outline/" ~ item.icon %}
+                        {{ item.value | capitalize }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </nav>
+</aside>

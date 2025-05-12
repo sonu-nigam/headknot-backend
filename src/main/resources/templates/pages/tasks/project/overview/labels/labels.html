@@ -1,0 +1,10 @@
+<div>
+    {% for label in labelList %}
+        {% set color = label.color %}
+        <span
+            class="{{ 'badge text-[' ~ color ~ '] relative overflow-hidden after:content-[\'\'] after:absolute after:w-full after:h-full after:top-0 after:left-0 after:opacity-10 after:bg-[currentcolor]' }}"
+        >
+            {{ label.title }}
+        </span>
+    {% endfor %}
+</div>

@@ -1,0 +1,153 @@
+{% extends "layout/tasks/base" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+    {% include "pages/tasks/project/common/projectHeader" %}
+    <div class="px-3 pt-5 pb-0 flex gap-3 items-stretch">
+        <div>
+            <div class="flex gap-3 items-center mb-2">
+                <div class="font-semibold text-slate-700 basis-[200px]">
+                    Members
+                </div>
+                <div class="flex-1 flex flex-wrap gap-1">
+                    <div class="avatar">
+                        <div class="w-10 rounded">
+                            <img
+                                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                                alt="Tailwind-CSS-Avatar-component"
+                            />
+                        </div>
+                    </div>
+                    <div class="avatar">
+                        <div class="w-10 rounded">
+                            <img
+                                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                                alt="Tailwind-CSS-Avatar-component"
+                            />
+                        </div>
+                    </div>
+                    <div class="avatar">
+                        <div class="w-10 rounded">
+                            <img
+                                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                                alt="Tailwind-CSS-Avatar-component"
+                            />
+                        </div>
+                    </div>
+                    <div class="avatar placeholder">
+                        <div
+                            class="bg-neutral text-neutral-content w-10 text-sm rounded"
+                        >
+                            <span>+99</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex gap-3 items-center mb-2">
+                <div class="font-semibold text-slate-700 basis-[200px]">
+                    Labels
+                </div>
+                <div>
+                    {% include "pages/tasks/project/overview/labels/labels" %}
+                </div>
+            </div>
+            <div class="divider"></div>
+            <h3 class="font-semibold text-slate-700 text-xl mb-3">
+                Description
+            </h3>
+            <p class="prose max-w-full max-h-[200px] overflow-hidden">
+                {{ project.description }}
+            </p>
+            <div class="font-semibold text-slate-700 text-xl mb-3 mt-6">
+                Stats
+            </div>
+        </div>
+        <div class="divider divider-vertical"></div>
+        <div class="grow shrink-0 basis-[400px] border p-3 rounded-lg">
+            <div>
+                <div class="flex gap-3 justify-between">
+                    <div class="font-semibold text-slate-700 mb-3">
+                        Properties
+                    </div>
+                    <div>
+                        <button
+                            class="btn btn-primary btn-xs btn-square rounded-[4px]"
+                        >
+                            {% inlineSvg "outline/plus" %}
+                        </button>
+                        <button class="btn btn-xs btn-square rounded-[4px]">
+                            {% inlineSvg "outline/dots" %}
+                        </button>
+                    </div>
+                </div>
+                <dl class="table">
+                    <div class="table-row">
+                        <dt class="table-cell w-32 py-1">Status</dt>
+                        <dd class="table-cell py-1">Backlog</dd>
+                    </div>
+                    <div class="table-row">
+                        <dt class="table-cell w-32 py-1">Priority</dt>
+                        <dd class="table-cell py-1">No Priority</dd>
+                    </div>
+                    <div class="table-row">
+                        <dt class="table-cell w-32 py-1">Members</dt>
+                        <dd class="table-cell py-1">Add Members</dd>
+                    </div>
+                    <div class="table-row">
+                        <dt class="table-cell w-32 py-1">Teams</dt>
+                        <dd class="table-cell py-1">Add Teams</dd>
+                    </div>
+                    <div class="table-row">
+                        <dt class="table-cell w-32 py-1">Current cycle</dt>
+                        <dd class="table-cell py-1">Priority</dd>
+                    </div>
+                </dl>
+            </div>
+            <tab-context>
+                <div class="mt-3">
+                    <div role="tablist" class="tabs tab-sm tabs-boxed !rounded-[4px]" tabindex="0">
+                        <toggle-button
+                            role="tab"
+                            name="status-and-priority"
+                            aria-label="Status"
+                            class="tab !rounded-[4px]"
+                            control="status-panel"
+                        >
+                            Status
+                        </toggle-button>
+                        <toggle-button
+                            role="tab"
+                            name="status-and-priority"
+                            aria-label="Priority"
+                            class="tab !rounded-[4px]"
+                            control="priority-panel"
+                            selected
+                        >
+                            Priority
+                        </toggle-button>
+                    </div>
+                    <div role="tabpanel" class="tab-content" id="status-panel">
+                        {% include "pages/tasks/project/overview/statusList/statusList" %}
+                        <div class="btn btn-sm w-full rounded-[4px]">
+                            {% inlineSvg "outline/plus" %} Add Status
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-content" id="priority-panel">
+                        {% include "pages/tasks/project/overview/priorityList/priorityList" %}
+                        <div class="btn btn-sm w-full rounded-[4px]">
+                            {% inlineSvg "outline/plus" %} Add Priority
+                        </div>
+                    </div>
+                </div>
+            </tab-context>
+            <div class="divider"></div>
+            <div>
+                <h3
+                    class="font-semibold text-slate-700 text-xl mb-3 mt-3 btn-sm"
+                >
+                    Milestones
+                </h3>
+                <div></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

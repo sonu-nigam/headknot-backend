@@ -1,0 +1,8 @@
+svg {
+    width: 1.2em;
+    height: 1.2em;
+}
+
+.checkbox:before {
+    transition-duration: 0.1s, 0.1s, 0.1s, 0.1s;
+}

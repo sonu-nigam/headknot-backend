@@ -1,0 +1,24 @@
+<a
+    href="/projects/{{project.slug}}"
+    hx-get="/projects/{{project.slug}}"
+    hx-push-url="true"
+    hx-swap="innerHTML"
+    hx-target="#content"
+    hx-headers='{"x-refresh": true}'
+    class="p-3 border border-gray-100 rounded"
+>
+    <div class="flex gap-2 items-center">
+        <div>
+            <div class="font-semibold opacity-50 block leading-tight">
+                {{project.slug}}
+            </div>
+            <time datetime="2020-05-15" class="text-xs block">May 15 2020</time>
+        </div>
+    </div>
+    <div class="font-bold text-xl mb-2">
+        {{project.projectName}}
+    </div>
+    <p>
+        {{project.description}}
+    </p>
+</a>

@@ -1,0 +1,8 @@
+<div
+    class="grid grid-cols-[repeat(_auto-fill,_minmax(250px,_1fr))] gap-3"
+    id="PROJECT_LIST"
+>
+    {% for project in projectList.content %}
+        {% include "pages/tasks/project/list/projectListItem" %}
+    {% endfor %}
+</div>

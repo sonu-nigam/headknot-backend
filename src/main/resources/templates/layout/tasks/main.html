@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+    <head>
+        <title>{% block title %} {% endblock %}</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdn.tailwindcss.com?plugins=typography,aspect-ratio,container-queries"></script>
+        <link href="https://cdn.jsdelivr.net/npm/daisyui@5.0.0-beta.1/daisyui.css" rel="stylesheet" type="text/css" />
+        <link href="/css/global.css" rel="stylesheet" />
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            "primary": "#6F9E7E",
+                            "secondary": "#3D405B",
+                            "neutral": "#3D405B",
+                        },
+                        fontFamily: {
+                            sans: ['Inter', 'sans-serif'],
+                            serif: ['Merriweather', 'serif'],
+                        },
+                    },
+                },
+                daisyui: {
+                    themes: [
+                        {
+                            defaultTheme: {
+                                "primary": "#6F9E7E",
+                                "secondary": "#3D405B",
+                                "accent": "#37cdbe",
+                                "neutral": "#3d4451",
+                                "base-100": "#ffffff",
+                                "--rounded-box": "0.5rem", // border radius rounded-box utility class, used in card and other large boxes
+                                "--rounded-btn": "0.5rem", // border radius rounded-btn utility class, used in buttons and similar element
+                                "--rounded-badge": "1.9rem", // border radius rounded-badge utility class, used in badges and similar
+                                "--animation-btn": "0.25s", // duration of animation when you click on button
+                                "--animation-input": "0.2s", // duration of animation for inputs like checkbox, toggle, radio, etc
+                                "--btn-focus-scale": "0.95", // scale transform of button when you focus on it
+                                "--border-btn": "1px", // border width of buttons
+                                "--tab-border": "1px", // border width of tabs
+                                "--tab-radius": "0.5rem", // border radius of tabs
+                            },
+                        },
+                    ],
+                },
+            };
+        </script>
+        <script type="module" src="https://unpkg.com/cally"></script>
+        <script src="https://unpkg.com/htmx.org@2.0.1"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.6/Sortable.min.js" integrity="sha512-csIng5zcB+XpulRUa+ev1zKo7zRNGpEaVfNB9On1no9KYTEY/rLGAEEpvgdw6nim1WdTuihZY1eqZ31K7/fZjw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <!-- <script src="/js/components/rich-textarea.js" type="module"></script> -->
+        <script src="/js/components/tab-list.js" type="module"></script>
+        <script src="/js/components/tab-context.js" type="module"></script>
+        <script src="/js/components/toggle-button.js" type="module"></script>
+        <script src="/js/components/dropdown-menu.js" type="module"></script>
+        <!-- <script src="/js/components/popover-box.js" type="module" async></script> -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    </head>
+    <body class="h-screen flex flex-col">
+        {% block body %}{% endblock %}
+        <script src="/js/form.js"></script>
+    </body>
+</html>

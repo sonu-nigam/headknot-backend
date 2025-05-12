@@ -1,0 +1,19 @@
+{% set homeUrl = "/projects/" ~ projectSlug %}
+{% extends "layout/tasks/base" %}
+{% block title %} Home {% endblock %}
+{% block content %}
+<div class="p-3 pb-0 ">
+    <div class="breadcrumbs text-sm">
+        <ul>
+            <li>Home</li>
+            <li>
+                <a href="{{ homeUrl }}">
+                    {{ projectSlug }}
+                </a>
+            </li>
+            <li>{{ taskSlug }}</li>
+        </ul>
+    </div>
+    {% include "pages/tasks/task/details/task" %}
+</div>
+{% endblock %}

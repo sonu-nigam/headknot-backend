@@ -1,0 +1,70 @@
+{% set projectStatusListURL = "/projects/" ~ projectSlug ~ "/status" %}
+<div>
+    <form
+        id="STATUS_LIST"
+        class="my-2"
+        hx-patch="{{ projectStatusListURL }}"
+        hx-trigger="end, refreshProjectStatusList"
+        hx-get="{{ projectStatusListURL }}"
+    >
+        <div class="htmx-indicator" style="cursor: default">Updating...</div>
+        {% for status in statusList %}
+            <div
+                class="flex border rounded-[4px] px-2 py-1 my-2 bg-white text-sm items-center"
+            >
+                <button class="mr-2 handle">
+                    {% inlineSvg "outline/grip-vertical" %}
+                </button>
+                <span class="mr-auto">{{ status.statusName }}</span>
+                <input
+                    type="hidden"
+                    name="status"
+                    value="{{ status.statusId }}"
+                />
+                <span class="flex gap-2">
+                    <button
+                        class="btn btn-xs btn-neutral btn-square rounded-[4px]"
+                    >
+                        {% inlineSvg "outline/pencil" %}
+                    </button>
+                    <button
+                        class="btn btn-xs btn-error btn-square rounded-[4px]"
+                    >
+                        {% inlineSvg "outline/trash" %}
+                    </button>
+                </span>
+            </div>
+        {% endfor %}
+    </form>
+    <div class="btn btn-sm w-full rounded-[4px]">
+        {% inlineSvg "outline/plus" %} Add Status
+    </div>
+</div>
+<script>
+    htmx.onLoad(function (content) {
+        var sortable = content.querySelector("#STATUS_LIST");
+        var sortableInstance = new Sortable(sortable, {
+            animation: 150,
+            ghostClass: "blue-background-class",
+
+            handle: ".handle",
+            // Make the `.htmx-indicator` unsortable
+            filter: ".htmx-indicator",
+            onMove: function (evt) {
+                return evt.related.className.indexOf("htmx-indicator") === -1;
+            },
+
+            // Disable sorting on the `end` event
+            onEnd: function (evt) {
+                this.option("disabled", true);
+            },
+        });
+
+        // Re-enable sorting on the `htmx:afterSwap` event
+        sortable.addEventListener("htmx:afterRequest", function () {
+            sortableInstance.option("disabled", false);
+        });
+    });
+    // htmx.logAll();
+    // monitorEvents(htmx.find("#task_tags"));
+</script>

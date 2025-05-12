@@ -1,0 +1,30 @@
+<div class="py-3 flex flex-col w-full" id="PROJECT_LIST">
+    {% for task in taskList.content %}
+        {% include "pages/tasks/task/list/taskListItem" %}
+    {% endfor %}
+</div>
+<script>
+    htmx.onLoad(function (content) {
+        var sortable = content.querySelector("#PROJECT_LIST");
+        var sortableInstance = new Sortable(sortable, {
+            animation: 150,
+            ghostClass: "blue-background-class",
+
+            // Make the `.htmx-indicator` unsortable
+            filter: ".htmx-indicator",
+            onMove: function (evt) {
+                return evt.related.className.indexOf("htmx-indicator") === -1;
+            },
+
+            // Disable sorting on the `end` event
+            onEnd: function (evt) {
+                this.option("disabled", true);
+            },
+        });
+
+        // Re-enable sorting on the `htmx:afterSwap` event
+        sortable.addEventListener("htmx:afterRequest", function () {
+            sortableInstance.option("disabled", false);
+        });
+    });
+</script>

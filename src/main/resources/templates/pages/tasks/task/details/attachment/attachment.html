@@ -1,0 +1,15 @@
+<table class="table table-sm table-pin-rows table-pin-cols">
+    <thead>
+        <tr>
+            <th>File Name</th>
+            <th>Size</th>
+            <th>Date Added</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in range(0, 5) %}
+        {% include "/pages/tasks/task/details/attachment/attachmentDataRow" %}
+        {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,91 @@
+<div
+    class="flex flex-wrap gap-1 max-w-96 min-w-fit"
+    id="{{ taskSlug }}_selected_labels"
+    style="anchor-name:--task-labels-{{ taskSlug }}-anchor;"
+>
+    {% for label in task.tags %}
+        <span
+            class="badge badge-sm rounded-full"
+            style="--badge-color: {{ label.color }}"
+        >
+            {{ label.title }}
+        </span>
+    {% endfor %}
+    <button
+        id="{{ taskSlug ~ '-task-labels' }}"
+        class="btn btn-xs btn-circle btn-neutral"
+        popovertarget="{{ taskSlug ~ '-task-labels-options' }}"
+        style="--size: calc(var(--size-selector, .25rem)* 5)"
+    >
+        {% inlineSvg "outline/plus" %}
+    </button>
+</div>
+<div
+    class="dropdown menu w-52 rounded-box bg-base-100 shadow-sm border top-2"
+    popover
+    id="{{ taskSlug ~ '-task-labels-options' }}"
+    style="{{ 'position-anchor:--task-labels-' ~ taskSlug ~ '-anchor' }}"
+>
+    <label class="input input-sm" id="{{ taskSlug }}_label_search_field">
+        <span class="opacity-50"> {% inlineSvg "outline/search" %} </span>
+        <input
+            class="grow"
+            type="search"
+            name="search"
+            placeholder="Search Label"
+            hx-get="{{ '/tasks/' ~ taskSlug }}/labels"
+            hx-trigger="input changed delay:500ms, keyup[key=='Enter'], {{ taskSlug }}:refreshTaskLabels from:body"
+            hx-target="#{{ taskSlug }}_task_labels"
+            hx-select="#{{ taskSlug }}_task_labels"
+            hx-swap="outerHTML"
+            hx-select-oob="#{{ taskSlug }}_selected_labels:innerHTML"
+        />
+    </label>
+    <div id="{{ taskSlug }}_task_labels" class="w-full p-0 mt-2">
+        {% if tagList|length < 1 %}
+            <button
+                class="btn btn-block btn-sm rounded-[2px] max-w-full justify-start whitespace-nowrap flex-nowrap"
+                name="title"
+                value="{{ searchQuery }}"
+                hx-include="this"
+                hx-post="{{ '/tasks/' ~ taskSlug }}/labels"
+                hx-swap="none"
+            >
+                Create Tag:
+                <span class="truncate">{{ searchQuery }}</span>
+            </button>
+        {% else %}
+            <ul
+                class="menu menu-sm p-0 w-full block max-h-[200px] overflow-y-auto"
+                hx-patch="{{ '/tasks/' ~ taskSlug }}/labels"
+                hx-trigger="change"
+                hx-swap="none"
+                hx-include="#{{ taskSlug }}_task_labels [name='tags']"
+            >
+                {% for label in tagList %}
+                    <li class="rounded-sm list-row">
+                        <label class="rounded-sm">
+                            {% if label.selected %}
+                                <input
+                                    type="checkbox"
+                                    class="checkbox checkbox-xs"
+                                    name="tags"
+                                    value="{{ label.tagId }}"
+                                    checked
+                                />
+                            {% else %}
+                                <input
+                                    type="checkbox"
+                                    class="checkbox checkbox-xs"
+                                    name="tags"
+                                    value="{{ label.tagId }}"
+                                />
+                            {% endif %}
+                            <span>{{ label.title }}</span>
+                        </label>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</div>

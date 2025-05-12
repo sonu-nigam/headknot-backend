@@ -1,0 +1,49 @@
+{% set hxAttrs = "" %}
+{% if hx is map %}
+    {% for entry in hx %}
+    {% endfor %}
+{% endif %}
+
+{% if data is iterable %}
+    <ul
+        class="menu menu-sm w-full block max-h-[200px] overflow-y-auto p-0 mt-2"
+        id="{{ menuId }}"
+        {{ hxAttrs }}
+    >
+        {% for item in data %}
+            <li>
+                {% block listitem %}
+                {% endblock %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% macro menuitem(id, class) %}
+    <li class="">
+        <label class="flex items-center">
+            <input
+                type="radio"
+                class="radio hidden"
+                name="assignedTo"
+                value="{{ user.userId }}"
+            />
+            <span class="avatar">
+                <div class="w-7 rounded-full">
+                    <img
+                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                    />
+                </div>
+            </span>
+            <div>
+                <div class="text-xs">
+                    {{ user.firstName }} {{ user.lastName }}
+                </div>
+                <div
+                    class="uppercase font-semibold opacity-50 text-[9px] leading-4"
+                >
+                    @{{ user.userName }}
+                </div>
+            </div>
+        </label>
+    </li>
+{% endmacro %}

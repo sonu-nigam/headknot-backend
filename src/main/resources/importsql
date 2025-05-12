@@ -1,0 +1,107 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+INSERT INTO users (id, full_name, email, password) VALUES
+(uuid_generate_v4(), 'Emily Johnson', 'admin@test.com', '{bcrypt}$2a$10$MNcPxMvP.E8.JcrNskHeSOOw0q8SOl/ppplPxZIA73qyQS3A0jHCy');
+--(uuid_generate_v4(), 'Michael', 'Williams', 'michaelw', 'michael.williams@x.dummyjson.com', '{bcrypt}$2a$12$Fru6cyYVCPHY5hspGooJhODdQHTiupYmwx6CjP1EN.02bltdRhuaW'),
+--(uuid_generate_v4(), 'Sophia', 'Brown', 'sophiab', 'sophia.brown@x.dummyjson.com', '{bcrypt}$2a$12$Fru6cyYVCPHY5hspGooJhODdQHTiupYmwx6CjP1EN.02bltdRhuaW'),
+--(uuid_generate_v4(), 'James', 'Davis', 'jamesd', 'james.davis@x.dummyjson.com', '{bcrypt}$2a$12$Fru6cyYVCPHY5hspGooJhODdQHTiupYmwx6CjP1EN.02bltdRhuaW'),
+--(uuid_generate_v4(), 'Emma', 'Miller', 'emmaj', 'emma.miller@x.dummyjson.com', '{bcrypt}$2a$12$Fru6cyYVCPHY5hspGooJhODdQHTiupYmwx6CjP1EN.02bltdRhuaW'),
+--(uuid_generate_v4(), 'Olivia', 'Wilson', 'oliviaw', 'olivia.wilson@x.dummyjson.com', '{bcrypt}$2a$12$Fru6cyYVCPHY5hspGooJhODdQHTiupYmwx6CjP1EN.02bltdRhuaW'),
+--(uuid_generate_v4(), 'Alexander', 'Jones', 'alexanderj', 'alexander.jones@x.dummyjson.com', '{bcrypt}$2a$12$Fru6cyYVCPHY5hspGooJhODdQHTiupYmwx6CjP1EN.02bltdRhuaW'),
+--(uuid_generate_v4(), 'Ava', 'Taylor', 'avat', 'ava.taylor@x.dummyjson.com', '{bcrypt}$2a$12$Fru6cyYVCPHY5hspGooJhODdQHTiupYmwx6CjP1EN.02bltdRhuaW'),
+--(uuid_generate_v4(), 'Ethan', 'Martinez', 'ethanm', 'ethan.martinez@x.dummyjson.com', '{bcrypt}$2a$12$Fru6cyYVCPHY5hspGooJhODdQHTiupYmwx6CjP1EN.02bltdRhuaW'),
+--(uuid_generate_v4(), 'Isabella', 'Anderson', 'isabellad', 'isabella.anderson@x.dummyjson.com', '{bcrypt}$2a$12$Fru6cyYVCPHY5hspGooJhODdQHTiupYmwx6CjP1EN.02bltdRhuaW'),
+--(uuid_generate_v4(), 'Liam', 'Garcia', 'liamg', 'liam.garcia@x.dummyjson.com', '{bcrypt}$2a$12$Fru6cyYVCPHY5hspGooJhODdQHTiupYmwx6CjP1EN.02bltdRhuaW'),
+--(uuid_generate_v4(), 'Mia', 'Rodriguez', 'miar', 'mia.rodriguez@x.dummyjson.com', '{bcrypt}$2a$12$Fru6cyYVCPHY5hspGooJhODdQHTiupYmwx6CjP1EN.02bltdRhuaW');
+
+--INSERT INTO authorities (username, role) VALUES
+--((SELECT user_id FROM users WHERE username = 'emilys'),'ROLE_USER'),
+--((SELECT user_id FROM users WHERE username = 'michaelw'),'ROLE_ADMIN'),
+--((SELECT user_id FROM users WHERE username = 'sophiab'),'ROLE_USER'),
+--((SELECT user_id FROM users WHERE username = 'jamesd'),'ROLE_ADMIN'),
+--((SELECT user_id FROM users WHERE username = 'emmaj'),'ROLE_USER'),
+--((SELECT user_id FROM users WHERE username = 'oliviaw'),'ROLE_ADMIN'),
+--((SELECT user_id FROM users WHERE username = 'alexanderj'),'ROLE_USER'),
+--((SELECT user_id FROM users WHERE username = 'avat'),'ROLE_ADMIN'),
+--((SELECT user_id FROM users WHERE username = 'ethanm'),'ROLE_USER'),
+--((SELECT user_id FROM users WHERE username = 'isabellad'),'ROLE_ADMIN'),
+--((SELECT user_id FROM users WHERE username = 'liamg'),'ROLE_ADMIN'),
+--((SELECT user_id FROM users WHERE username = 'miar'),'ROLE_ADMIN');
+
+--INSERT INTO user_roles (user_id, role_id) VALUES
+--((SELECT user_id FROM users WHERE username = 'sam'), (SELECT role_id FROM roles WHERE role_name = 'ROLE_USER'));
+
+--INSERT INTO task_status (status_id, name, color, status_order) VALUES
+--(uuid_generate_v4(), 'Backlog', '#FF2147', -1),
+--(uuid_generate_v4(), 'To Do', '#E5E5E5', 0),
+--(uuid_generate_v4(), 'In Progress', '#5E94FF', 1),
+--(uuid_generate_v4(), 'Completed', '#339900', 2);
+--
+--INSERT INTO task_priority (priority_id, title, precedence, color) VALUES
+--(uuid_generate_v4(), 'Urgent', 0, '#EC3A48'),
+--(uuid_generate_v4(), 'High', 1, '#FAA116'),
+--(uuid_generate_v4(), 'Medium', 2, '#31B791'),
+--(uuid_generate_v4(), 'Low', 3, '#E5E5E5');
+--
+--INSERT INTO project (project_id, project_name, slug, description, total_task_count) VALUES
+--(uuid_generate_v4(), 'Windows Mobile Phone', 'WMP', 'Lorem ipsum odor amet, consectetuer adipiscing elit. Curabitur pretium congue egestas eu praesent amet. Arcu finibus condimentum; magnis hendrerit malesuada interdum habitant.', 2),
+--(uuid_generate_v4(), 'Android Mobile Phone', 'AMP', 'Lorem ipsum odor amet, consectetuer adipiscing elit. Curabitur pretium congue egestas eu praesent amet. Arcu finibus condimentum; magnis hendrerit malesuada interdum habitant.', 0),
+--(uuid_generate_v4(), 'Open Dataset Search', 'ODS', 'Lorem ipsum odor amet, consectetuer adipiscing elit. Curabitur pretium congue egestas eu praesent amet. Arcu finibus condimentum; magnis hendrerit malesuada interdum habitant.', 0),
+--(uuid_generate_v4(), 'Open Source Data Explorer', 'OSDE', 'Lorem ipsum odor amet, consectetuer adipiscing elit. Curabitur pretium congue egestas eu praesent amet. Arcu finibus condimentum; magnis hendrerit malesuada interdum habitant.', 0),
+--(uuid_generate_v4(), 'TensorFlow', 'TSF', 'Lorem ipsum odor amet, consectetuer adipiscing elit. Curabitur pretium congue egestas eu praesent amet. Arcu finibus condimentum; magnis hendrerit malesuada interdum habitant.', 0);
+--
+--INSERT INTO task (id, task_id, task_order, title, description, estimates, project_id, status, priority, created_at, updated_at, assigned_to) VALUES
+--(uuid_generate_v4(), 1, 1, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 1', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'WMP'), (SELECT status_id FROM task_status WHERE name = 'Backlog'), (SELECT priority_id from task_priority where title = 'Urgent'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 2, 2, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 2', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'WMP'), (SELECT status_id FROM task_status WHERE name = 'In Progress'), (SELECT priority_id FROM task_priority WHERE title = 'High'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emmaj')),
+--(uuid_generate_v4(), 1, 1, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 1', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 2, 2, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 2', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 3, 3, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 3', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 4, 4, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 4', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 5, 5, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 5', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 6, 6, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 6', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 7, 7, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 7', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 8, 8, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 8', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 9, 9, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 1', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 10, 10, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 2', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 11, 11, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 3', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 12, 12, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 4', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 13, 13, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 5', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 14, 14, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 6', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 15, 15, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 7', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 16, 16, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 8', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 17, 17, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 1', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 18, 18, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 2', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 19, 19, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 3', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 20, 20, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 4', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 21, 21, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 5', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 22, 22, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 6', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 23, 23, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 7', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 24, 24, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 8', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 25, 25, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 1', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 26, 26, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 2', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 27, 27, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 3', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 28, 28, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 4', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 29, 29, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 5', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 30, 30, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 6', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 31, 31, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 7', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys')),
+--(uuid_generate_v4(), 32, 32, 'Lorem ipsum odor amet, consectetuer adipiscing elit.', 'Task 8', floor(random() * 10 + 1)::int, (SELECT project_id FROM project WHERE slug = 'AMP'), (SELECT status_id FROM task_status WHERE name = 'Completed'), (SELECT priority_id FROM task_priority WHERE title = 'Low'), CURRENT_DATE, CURRENT_DATE, (SELECT user_id FROM users WHERE username = 'emilys'));
+--
+--INSERT INTO task_tag (tag_id, title, project_id, color) VALUES
+--(uuid_generate_v4(), 'Tag1', (SELECT project_id FROM project WHERE slug = 'WMP'), '#FF0000'),
+--(uuid_generate_v4(), 'Tag2', (SELECT project_id FROM project WHERE slug = 'WMP'), '#FFA500'),
+--(uuid_generate_v4(), 'Tag3', (SELECT project_id FROM project WHERE slug = 'WMP'), '#FFFF00'),
+--(uuid_generate_v4(), 'Tag4', (SELECT project_id FROM project WHERE slug = 'WMP'), '#008000'),
+--(uuid_generate_v4(), 'Tag5', (SELECT project_id FROM project WHERE slug = 'WMP'), '#0000FF'),
+--(uuid_generate_v4(), 'Tag6', (SELECT project_id FROM project WHERE slug = 'WMP'), '#4B0082'),
+--(uuid_generate_v4(), 'Tag7', (SELECT project_id FROM project WHERE slug = 'WMP'), '#EE82EE');
+
+INSERT INTO document (id, title, parent_id) VALUES
+('b3ed8df1-e269-4ffc-a1fa-7c8f7f90863d', 'Note 1', null),
+(uuid_generate_v4(), 'Note 2', null),
+(uuid_generate_v4(), 'Note 3', null),
+(uuid_generate_v4(), 'Note 4', null),
+(uuid_generate_v4(), 'Note 5', null),
+(uuid_generate_v4(), 'Note 6', null),
+(uuid_generate_v4(), 'Note 7', null),
+(uuid_generate_v4(), 'Note 11', 'b3ed8df1-e269-4ffc-a1fa-7c8f7f90863d'),
+(uuid_generate_v4(), 'Note 12', 'b3ed8df1-e269-4ffc-a1fa-7c8f7f90863d');

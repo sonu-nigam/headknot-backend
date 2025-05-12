@@ -1,0 +1,12 @@
+{% macro input %}
+    <label class="input input-sm">
+        {% inlineSvg "outline/search" %}
+        <input
+            type="search"
+            class="grow"
+            placeholder="Search"
+            name="search"
+            autocomplete="off"
+        />
+    </label>
+{% endmacro %}

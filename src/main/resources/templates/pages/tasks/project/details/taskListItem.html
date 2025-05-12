@@ -1,0 +1,51 @@
+{% set taskSlug = project.slug ~ "-" ~ task.taskId %}
+{% set isLastRow = loop.last and taskList.hasNext() %}
+{% set nextPageUrl = "/projects/" ~ project.slug ~ "?page=" ~ (taskList.getNumber() + 1) %}
+{% set trigger = isLastRow ? 'hx-trigger="intersect once"': null %}
+{% set swap = isLastRow ? 'hx-swap=afterend': null %}
+{% set get = isLastRow ? 'hx-get=' ~ nextPageUrl: null %}
+{% set select = isLastRow ? 'hx-select="tbody tr"': null %}
+{% set headers = isLastRow ? 'hx-headers="{ x-refresh: true }"': null %}
+
+<tr
+    class="hover"
+    {{ get|raw }}
+    {{ swap|raw }}
+    {{ trigger|raw }}
+    {{ select|raw }}
+    {{ headers|raw }}
+>
+    <th>
+        <button class="btn btn-sm btn-ghost btn-square handle">
+            {% inlineSvg "outline/grip-vertical" %}
+        </button>
+        <input
+            type="checkbox"
+            name="{{ taskSlug }}"
+            class="checkbox checkbox-xs rounded-sm"
+        />
+        <input type="hidden" name="taskOrder" value="{{ taskSlug }}" />
+    </th>
+    <td>{% include "pages/tasks/task/details/properties/issueType" %}</td>
+    <td>
+        <a
+            href="/tasks/{{ project.slug }}-{{ task.taskId }}"
+            class="text-blue-700 font-semibold truncate flex-1"
+        >
+            {{ taskSlug }}
+        </a>
+    </td>
+    <td><div class="truncate">{{ task.title }}</div></td>
+    <td>{% include "pages/tasks/task/details/properties/status" %}</td>
+    <td>{% include "pages/tasks/task/details/properties/priority" %}</td>
+    <td>{% include "pages/tasks/task/details/properties/labels" %}</td>
+    <td>{% include "pages/tasks/task/details/properties/assignedTo" %}</td>
+    <td>{% include "pages/tasks/task/details/properties/dueDate" %}</td>
+    <td>{{ task.createdAt | date("yyyy-MM-dd") }}</td>
+    <td>{{ task.updatedAt | date("yyyy-MM-dd") }}</td>
+    <th>
+        <button class="btn btn-sm btn-square btn-ghost">
+            {% inlineSvg "outline/dots" %}
+        </button>
+    </th>
+</tr>

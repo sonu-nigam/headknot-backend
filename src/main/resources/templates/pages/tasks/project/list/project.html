@@ -1,0 +1,32 @@
+<div class="flex justify-between items-end mb-3">
+    <div class="text-xl font-semibold">Project List</div>
+    <div>
+        <button
+            class="btn btn-sm btn-neutral"
+            onclick="CREATE_PROJECT_MODAL.showModal()"
+            name="add-project"
+        >
+            {% inlineSvg "outline/plus" %} New Project
+        </button>
+        <dialog id="CREATE_PROJECT_MODAL" class="modal">
+            <div class="modal-box p-0 rounded-md">
+                {% include "forms/tasks/project/createProject" %}
+            </div>
+        </dialog>
+    </div>
+</div>
+{% if projectList.content is empty %}
+    {% embed "layout/shared/noDataAvailable" %}
+        {% block actionButton %}
+            <button
+                class="btn btn-neutral"
+                onclick="CREATE_PROJECT_MODAL.showModal()"
+                name="add-project"
+            >
+                {% inlineSvg "outline/plus" %} Add Project
+            </button>
+        {% endblock %}
+    {% endembed %}
+{% else %}
+    {% include "pages/tasks/project/list/projectList" %}
+{% endif %}

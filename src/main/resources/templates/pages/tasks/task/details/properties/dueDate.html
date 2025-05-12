@@ -1,0 +1,44 @@
+{% set dashedTaskSlug = taskSlug | replace({"-": "_"}) %}
+{% set buttonid = dashedTaskSlug ~ "_task_dueDate" %}
+{% set popovertarget = "taskList_" ~ dashedTaskSlug ~ "_dueDate_picker" %}
+{% set anchorname = "--" ~ dashedTaskSlug ~ "_dueDate_anchor" %}
+{% set dropdownClass = "w-auto" %}
+
+<button
+    popovertarget="{{ popovertarget }}"
+    class="input input-sm"
+    id="{{ buttonid }}"
+    style="anchor-name:{{ anchorname }}"
+>
+    N.A
+</button>
+{% embed "components/dropdown" with { dropdownClass: "w-auto" } %}
+    {% block options %}
+        <style>
+            calendar-date {
+                &::part(container) {
+                    padding: 0px;
+                }
+            }
+        </style>
+        <calendar-date onchange="{{ buttonid }}.innerText = this.value">
+            <svg
+                aria-label="Previous"
+                slot="previous"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+            >
+                <path d="M15.75 19.5 8.25 12l7.5-7.5"></path>
+            </svg>
+            <svg
+                aria-label="Next"
+                slot="next"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+            >
+                <path d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
+            </svg>
+            <calendar-month></calendar-month>
+        </calendar-date>
+    {% endblock %}
+{% endembed %}

@@ -1,0 +1,48 @@
+{%set projectUrl = "/projects/" ~ projectSlug %}
+
+{% extends "layout/tasks/base" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+    <div class="p-3">
+        <h2 class="text-2xl font-semibold">Your Work</h2>
+        <div class="divider"></div>
+        <div>
+            <div class="flex items-center gap-2 justify-between mb-2">
+                <div>Recent Projects</div>
+                <a href="/projects" class="text-sm link">View All Projects</a>
+            </div>
+            <div class="grid grid-cols-[repeat(_auto-fill,_minmax(250px,_1fr))] gap-3" id="PROJECT_LIST">
+                <a
+                    href="/projects/{{projectSlug}}"
+                    class="border border-gray-100 rounded"
+                >
+                    <div class="flex gap-2 items-center bg-gray-100 p-3">
+                        <div>
+                            <div class="font-bold">
+                                Windows Mobile Phone
+                            </div>
+                            <div class="font-semibold opacity-50 block leading-tight text-xs">
+                                {{projectSlug}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-3">
+                        <ul class="text-xs">
+                            <li class="flex gap-2 justify-between">
+                                <span>Open Tasks</span>
+                                <span class="text-xs block font-semibold">4</span>
+                            </li>
+                            <li class="flex gap-2 justify-between">
+                                <span>Current Sprint Ends</span>
+                                <time datetime="2020-05-15" class="text-xs block font-semibold">May 15 2020</time>
+                            </li>
+                        </ul>
+                        <p>
+                            {{description}}
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

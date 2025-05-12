@@ -1,0 +1,92 @@
+{% set dashedTaskSlug = taskSlug | replace({"-": "_"}) %}
+{% set buttonid = dashedTaskSlug ~ "_task_assignedTo" %}
+{% set popovertarget = "taskList_" ~ dashedTaskSlug ~ "_assignedTo_options" %}
+{% set anchorname = "--" ~ dashedTaskSlug ~ "_assignedTo_anchor" %}
+
+<button
+    class="btn btn-ghost btn-sm btn-neutral -ml-3"
+    popovertarget="{{ popovertarget }}"
+    id="{{ buttonid }}"
+    style="anchor-name:{{ anchorname }}"
+    hx-trigger="refresh_task_assignedTo:{{ taskSlug }} from:body"
+    hx-swap="outerHTML"
+    hx-select="#{{ dashedTaskSlug ~ '_task_assignedTo' }}"
+    hx-target="#{{ dashedTaskSlug ~ '_task_assignedTo' }}"
+    hx-get="{{ '/tasks/' ~ taskSlug ~ '/assignedTo' }}"
+    hx-select-oob="{{ popovertarget }}:outerHTML"
+>
+    <div class="avatar">
+        <div class="w-5 rounded-full">
+            <img
+                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+            />
+        </div>
+    </div>
+    <span>{{ task.assignedTo.firstName }} {{ task.assignedTo.lastName }}</span>
+</button>
+{% embed "components/dropdown" %}
+    {% block search %}
+        <label class="input input-sm">
+            {% inlineSvg "outline/search" %}
+            <input
+                type="search"
+                class="grow"
+                placeholder="Search"
+                name="search"
+                autocomplete="off"
+                hx-trigger="input changed delay:500ms, keyup[key=='Enter']"
+                hx-get="{{ '/tasks/' ~ taskSlug }}/assignedTo"
+                hx-target="#{{ dashedTaskSlug }}_task_assignedTo_users"
+                hx-select="#{{ dashedTaskSlug }}_task_assignedTo_users"
+                hx-swap="outerHTML"
+                autofocus
+            />
+        </label>
+    {% endblock %}
+    {% block options %}
+        <div id="{{ dashedTaskSlug }}_task_assignedTo_users" class="w-full p-0">
+            {% if userList is empty %}
+                <div>Invite user</div>
+            {% else %}
+                <form
+                    hx-patch="/tasks/{{ taskSlug }}/assignedTo"
+                    hx-swap="none"
+                    hx-trigger="change"
+                >
+                    {% embed "components/list" with { "data": userList } %}
+                        {% block listitem %}
+                            <label
+                                class="flex items-center {{ item.userId == task.assignedTo.userId ? 'menu-active': '' }}"
+                            >
+                                <input
+                                    type="radio"
+                                    class="radio hidden"
+                                    name="assignedTo"
+                                    value="{{ item.userId }}"
+                                />
+                                <span class="avatar">
+                                    <div class="w-7 rounded-full">
+                                        <img
+                                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                                        />
+                                    </div>
+                                </span>
+                                <div>
+                                    <div class="text-xs">
+                                        {{ item.firstName }}
+                                        {{ item.lastName }}
+                                    </div>
+                                    <div
+                                        class="uppercase font-semibold opacity-50 text-[9px] leading-4"
+                                    >
+                                        @{{ item.userName }}
+                                    </div>
+                                </div>
+                            </label>
+                        {% endblock %}
+                    {% endembed %}
+                </form>
+            {% endif %}
+        </div>
+    {% endblock %}
+{% endembed %}
