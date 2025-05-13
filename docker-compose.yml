@@ -8,6 +8,6 @@ services:
             - "8080:8080"
         networks:
             - dokploy-network
-
 networks:
     dokploy-network:
+        external: true
