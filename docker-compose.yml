@@ -3,7 +3,7 @@ version: '3.8'
 services:
     springboot-app:
         build: .
-        container_name: springboot-container
+        container_name: backend
         ports:
             - "8080:8080"
         environment:
