@@ -1,15 +1,59 @@
 version: '3.8'
 
 services:
+#   DEVELOPMENT
+    postgres:
+        env_file: ".env"
+        container_name: "${POSTGRES_HOST}"
+        image: "postgres:latest"
+        volumes:
+            - postgres_data:/var/lib/postgresql/data  # Use named volume for persistence
+        ports:
+            - "${POSTGRES_PORT}"  # Explicitly map to host port (optional)
+        restart: unless-stopped
+        profiles: [dev]
+
+    pgadmin:
+        env_file: ".env"
+        container_name: workflow_pgadmin
+        image: dpage/pgadmin4:latest
+        volumes:
+            - pgadmin_data:/var/lib/pgadmin
+            - ./docker_pgadmin_servers.json:/pgadmin4/servers.json
+        ports:
+            - "${PGADMIN_LISTEN_PORT}"
+        entrypoint:
+            - "/bin/sh"
+            - "-c"
+            - "/bin/echo 'postgres:${POSTGRES_PORT}:*:${POSTGRES_USER}:${POSTGRES_PASSWORD}' > /tmp/pgpassfile && chmod 600 /tmp/pgpassfile && /entrypoint.sh"
+        profiles: [dev]
+
+#   PRODUCTION
     springboot-app:
         build: .
-        container_name: backend
         ports:
-            - "8080:8080"
-        environment:
-            SPRING_PROFILES_ACTIVE: dev
+            - ${POSTGRES_DB}
+            - ${POSTGRES_PASSWORD}
+            - ${POSTGRES_USER}
+            - ${POSTGRES_HOST}
+            - ${POSTGRES_PORT}
+            - ${JWT_SECRET_KEY}
         networks:
             - dokploy-network
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.frontend-app.rule=Host(`api.headknot.app`)"
+            - "traefik.http.routers.frontend-app.entrypoints=websecure"
+            - "traefik.http.routers.frontend-app.tls.certResolver=letsencrypt"
+            - "traefik.http.services.frontend-app.loadbalancer.server.port=8080"
+        profiles: [prod]
 
+    # Add more containers below (nginx, postgres, etc.)
+# Define a network, which allows containers to communicate
+# with each other, by using their container name as a hostname
 networks:
     dokploy-network:
+
+volumes:
+    postgres_data:  # Named volume for PostgreSQL (managed by Docker)
+    pgadmin_data:   # Named volume for PGAdmin

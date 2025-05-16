@@ -1,10 +1,12 @@
 spring:
+    config:
+        import: optional:file:.env[.properties]
     application:
         name: workflow
     datasource:
-        url: jdbc:postgresql://workflow_postgres:5432/mydatabase
-        username: myuser
-        password: secret
+        url: "jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB}"
+        username: ${POSTGRES_USERNAME}
+        password: ${POSTGRES_PASSWORD}
         initialization-mode: always
     jpa:
         hibernate:
@@ -31,7 +33,7 @@ spring:
         lazy-initialization: true
 
 server:
-    port: 8080
+    port: ${SPRING_PORT}
     error:
         include-message: always
         include-stacktrace: never
@@ -64,5 +66,5 @@ hibernate:
 
 security:
     jwt:
-        secret-key: 3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b
+        secret-key: ${JWT_SECRET_KEY}
         expiration-time: 3600000
