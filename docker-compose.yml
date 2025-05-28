@@ -8,6 +8,12 @@ services:
             - "8080:8080"
         networks:
             - dokploy-network
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.backend-app.rule=Host(`api.headknot.app`)"
+            - "traefik.http.routers.backend-app.entrypoints=websecure"
+            - "traefik.http.routers.backend-app.tls.certResolver=letsencrypt"
+            - "traefik.http.services.backend-app.loadbalancer.server.port=8080"
 networks:
     dokploy-network:
         external: true
