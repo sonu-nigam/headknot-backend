@@ -1,4 +1,4 @@
-package com.example.noteapp;
+package com.example.headknot;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

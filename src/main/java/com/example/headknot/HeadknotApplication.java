@@ -1,13 +1,13 @@
-package com.example.noteapp;
+package com.example.headknot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class NoteappApplication {
+public class HeadknotApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(NoteappApplication.class, args);
+		SpringApplication.run(HeadknotApplication.class, args);
 	}
 
 }
