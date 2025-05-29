@@ -20,7 +20,7 @@ repositories {
 }
 
 ext {
-	set('springModulithVersion', "1.3.0-M3");
+	set('springModulithVersion', "1.3.0-M3")
 }
 
 dependencies {
@@ -38,11 +38,7 @@ dependencies {
 	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.6'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
-	compileOnly 'org.projectlombok:lombok'
-
 	runtimeOnly 'org.springframework.boot:spring-boot-devtools'
-
-	annotationProcessor 'org.projectlombok:lombok'
 
 	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
 
@@ -60,15 +56,8 @@ dependencyManagement {
 	}
 }
 
-bootRun{
-	sourceResources sourceSets.main
-}
-
 tasks.named('test') {
 	useJUnitPlatform()
-}
-
-test {
 	testLogging {
 		events "passed", "skipped", "failed"
 		showExceptions true
@@ -77,15 +66,4 @@ test {
 		showStackTraces true
 		showStandardStreams = false
 	}
-}
-
-
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-}
-
-tasks.named('test') {
-	useJUnitPlatform()
 }
