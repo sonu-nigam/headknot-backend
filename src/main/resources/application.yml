@@ -6,9 +6,11 @@ spring:
     datasource:
         driver-class-name: org.postgresql.Driver
 #        url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB}"
+#        username: ${POSTGRES_USERNAME}
+#        password: ${POSTGRES_PASSWORD}
         url: jdbc:postgresql://headknot-database-7c9pzr:5432/headknot_db
-        username: ${POSTGRES_USERNAME}
-        password: ${POSTGRES_PASSWORD}
+        username: admin
+        password: admin
         initialization-mode: always
     jpa:
         hibernate:
