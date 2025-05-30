@@ -1,12 +1,17 @@
 spring:
     application:
         name: headknot
-#    datasource:
+    datasource:
+        url: jdbc:h2:mem:testdb
+        driverClassName: org.h2.Driver
+        username: sa
+        password:
 #        url: "jdbc:postgresql://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB}"
 #        username: ${POSTGRES_USERNAME}
 #        password: ${POSTGRES_PASSWORD}
-#        initialization-mode: always
-#    jpa:
+        initialization-mode: always
+    jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
 #        hibernate:
 #            ddl-auto: update
 #        show-sql: true
@@ -18,20 +23,20 @@ spring:
 #                    charSet: UTF-8
 #                format_sql: true
 #        defer-datasource-initialization: true
-#    sql:
-#        init:
-#            mode: always
-#    devtools:
-#        livereload:
-#            enabled: true
-#        restart:
-#            enabled: true
-#    main:
-#        log-startup-info: false
-#        lazy-initialization: true
+    sql:
+        init:
+            mode: always
+    devtools:
+        livereload:
+            enabled: true
+        restart:
+            enabled: true
+    main:
+        log-startup-info: false
+        lazy-initialization: true
 
 server:
-    port: ${SPRING_PORT}
+    port: ${SPRING_PORT:8080}
     error:
         include-message: always
         include-stacktrace: never
