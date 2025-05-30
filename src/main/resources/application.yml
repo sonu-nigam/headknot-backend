@@ -6,7 +6,8 @@ spring:
 #        driverClassName: org.h2.Driver
 #        username: sa
 #        password:
-        url: jdbc:postgresql://admin:admin@headknot-database-7c9pzr:5432/headknot_db
+#        url: jdbc:postgresql://147.79.68.246:5432/headknot_db
+        url: jdbc:postgresql://headknot-database-7c9pzr:5432/headknot_db
         username: admin
         password: admin
         driver-class-name: org.postgresql.Driver
