@@ -5,9 +5,9 @@ services:
         build: .
         container_name: backend
         environment:
-            - POSTGRES_USER=admin
+            - POSTGRES_USERNAME=admin
             - POSTGRES_PASSWORD=admin
-            - POSTGRES_DB=mydb
+            - POSTGRES_DB=headknot_db
             - POSTGRES_HOST=headknot-database-7c9pzr
         ports:
             - "8080:8080"
