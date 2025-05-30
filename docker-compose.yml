@@ -9,6 +9,7 @@ services:
             - POSTGRES_PASSWORD=admin
             - POSTGRES_DB=headknot_db
             - POSTGRES_HOST=headknot-database-7c9pzr
+            - POSTGRES_PORT=5432
         ports:
             - "8080:8080"
         networks:
