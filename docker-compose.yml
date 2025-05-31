@@ -5,6 +5,7 @@ services:
         build: .
         container_name: backend
         environment:
+            - SPRING_PORT=8080
             - POSTGRES_USERNAME=admin
             - POSTGRES_PASSWORD=admin
             - POSTGRES_DB=headknot_db
