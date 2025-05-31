@@ -5,12 +5,9 @@ spring:
         name: headknot
     datasource:
         driver-class-name: org.postgresql.Driver
-        url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB}
-        username: ${POSTGRES_USERNAME}
-        password: ${POSTGRES_PASSWORD}
-        #        url: jdbc:postgresql://headknot-database-7c9pzr:5432/headknot_db
-        #        username: admin
-        #        password: admin
+        url: jdbc:postgresql://headknot-database-7c9pzr:5432/headknot_db
+        username: admin
+        password: admin
         initialization-mode: always
     jpa:
         hibernate:
@@ -37,7 +34,7 @@ spring:
         lazy-initialization: true
 
 server:
-    port: ${SPRING_PORT:8080}
+    port: 8080
     error:
         include-message: always
         include-stacktrace: never
