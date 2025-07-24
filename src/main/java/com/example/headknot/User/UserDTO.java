@@ -10,7 +10,8 @@ import java.util.UUID;
 @Data
 public class UserDTO {
     private UUID id;
-    private String fullName;
+    private String firstName;
+    private String lastName;
     private Set<RoleEntity> roles;
     private String email;
 }

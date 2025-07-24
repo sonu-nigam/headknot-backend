@@ -36,8 +36,14 @@ public class UserServiceImpl implements UserService {
 
         String hashedPassword = passwordEncoder.encode(payload.getPassword());
 
-        UserEntity user = modelMapper.map(payload, UserEntity.class);
-        user.setPassword(hashedPassword);
+        UserEntity user = new UserEntity(
+                null, // id will be generated
+                payload.getFirstName(), // firstName
+                payload.getLastName(), // lastName
+                hashedPassword, // password
+                null, // roles will be set later
+                payload.getEmail() // email
+        );
         return userRepository.save(user);
     }
 
@@ -59,4 +65,3 @@ public class UserServiceImpl implements UserService {
         return modelMapper.map(user, UserDTO.class);
     }
 }
-

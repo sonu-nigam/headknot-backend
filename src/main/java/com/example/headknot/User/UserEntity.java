@@ -14,7 +14,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "users")
 @Data
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserEntity extends BaseEntity {
@@ -23,8 +23,11 @@ public class UserEntity extends BaseEntity {
     @Column(nullable = false)
     private UUID id;
 
-    // Username of the user
-    private String fullName;
+    // First name of the user
+    private String firstName;
+
+    // Last name of the user
+    private String lastName;
 
     // Password of the user
     private String password;
